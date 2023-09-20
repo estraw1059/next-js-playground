@@ -11,10 +11,22 @@ datasource db {
 }
 
 model Novel {
-  id String @id @default(uuid())
-  title String
-  author Author[]
-  image String
+  id        String   @id @default(uuid())
+  title     String
+  image     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  author    Author[]
+}
+
+
+// pnpm primsa format
+// That will link
+// npx prisma push (Creates the tables)
+
+model Author {
+  id   String @id @default(uuid())
+  name String
+  Novel   Novel?  @relation(fields: [novelId], references: [id])
+  novelId String?
 }
